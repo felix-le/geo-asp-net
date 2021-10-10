@@ -33,5 +33,11 @@ namespace Thusday_lession1.Controllers
       ViewBag.category = category;
       return View();
     }
+
+    // /Categories/Create
+    public IActionResult Create()
+    {
+      return View();
+    }
   }
 }
