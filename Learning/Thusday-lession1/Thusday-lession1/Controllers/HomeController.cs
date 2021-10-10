@@ -34,7 +34,15 @@ namespace Thusday_lession1.Controllers
       /* IActionResult usually returns a view (a web page) but could also return: 
        * Json object, HTTP status code (e.g. 404, 401..), file, redirect
        */
+      ViewBag.currentTime = DateTime.Now;
       return View();
+    }
+
+    // Page name changed differently
+
+    public IActionResult NameChanged()
+    {
+      return View("Name-Changed");
     }
 
 
