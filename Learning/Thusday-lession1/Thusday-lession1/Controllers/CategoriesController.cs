@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Thusday_lession1.Models;
 
 namespace Thusday_lession1.Controllers
 {
@@ -10,7 +11,14 @@ namespace Thusday_lession1.Controllers
   {
     public IActionResult Index()
     {
-      return View();
+      // use the Category model to generate a list of 10 mock Category objects
+
+      var categories = new List<Category>();
+      for (var i = 1; i < 11; i++)
+      {
+        categories.Add(new Category { CategoryId = i, Name = "Category " + i.ToString() });
+      }
+      return View(categories);
     }
 
     // Add a new method that's call when user click a category from the list displayed
