@@ -9,12 +9,20 @@
 1. Create a new method + View()
 2. Add new > View > template > choose the template > add > build
 
-## the difference between 
-
-
+## the difference between @model Project.Models.ModelNa
 
 @model Project.Models.ModelName > kind of the key to all of the form generation code 
 
 @model Thusday_lession1.Models.Category
 
 Create based  on the category model 
+
+
+## How to connect with azure DB
+
+1. Create local DB (user same with windows)
+2. Login portal.azure.com > create new db > choose package + save the admin account
+
+3. Microsoft Server > View > Registered Servers > New Server registration
+4. portal.azure.com >the DB server > fire wall > set new ip address > 0000 255255255255
+5. input the database information 
