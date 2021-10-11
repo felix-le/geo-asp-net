@@ -11,7 +11,7 @@ namespace TodoList.Data
   {
 
     // make global references from model to D
-    public DbSet<TodoListContent> TodoLists { get; set; }
+    public DbSet<TodoListContent> TodoListContents { get; set; }
     public DbSet<Todo> Todos { get; set; }
 
     public DbSet<UserProfile> UserProfiles { get; set; }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TodoList.Models
 {
-  public class User
+  public class UserProfile
   {
-    public int UserId { get; set; }
+    public int UserProfileId { get; set; }
 
     [Required]
     public string FirstName { get; set; }
@@ -20,9 +20,9 @@ namespace TodoList.Models
     public string Phone { get; set; }
 
     [Required]
-    public int ListId { get; set; }
+    public int TodoListContentId { get; set; }
 
     //ref to child model ( 1 user has many to do list)
-    public List<TodoList> Lists { get; set; }
+    public List<TodoListContent> Lists { get; set; }
   }
 }

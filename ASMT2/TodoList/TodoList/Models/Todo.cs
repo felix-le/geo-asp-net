@@ -23,7 +23,7 @@ namespace TodoList.Models
     public int TodoListId { get; set; }
 
     // add parent ref to Todo List (1 user => Many todo List)
-    public TodoList List { get; set; }
+    public TodoListContent List { get; set; }
 
   }
 }
