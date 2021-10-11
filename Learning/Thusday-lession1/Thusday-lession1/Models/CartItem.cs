@@ -19,5 +19,8 @@ namespace Thusday_lession1.Models
 
     [Required]
     public int PetId { get; set; }
+
+    // parent ref 
+    public Pet Pet { get; set; }
   }
 }

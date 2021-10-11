@@ -16,5 +16,8 @@ namespace Thusday_lession1.Models
     [Display(Name = "Please give my name!!!")]
 
     public string Name { get; set; }
+
+    //Ref to child model: 1 Category => many Pets
+    public List<Pet> Pets { get; set; }
   }
 }

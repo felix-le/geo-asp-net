@@ -32,5 +32,9 @@ namespace Thusday_lession1.Models
 
     [Required]
     public string CustomerId { get; set; }
+
+    //Child ref: 1 Order => many order Details
+
+    public List<OrderDetail> OrderDetails { get; set; }
   }
 }
