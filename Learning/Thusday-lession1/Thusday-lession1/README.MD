@@ -26,3 +26,9 @@ Create based  on the category model
 3. Microsoft Server > View > Registered Servers > New Server registration
 4. portal.azure.com >the DB server > fire wall > set new ip address > 0000 255255255255
 5. input the database information 
+
+## Create DB
+
+1. List the tables /Models
+2. List the properties / columns
+3. Relationships between tables/ models
