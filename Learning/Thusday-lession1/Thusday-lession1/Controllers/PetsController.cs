@@ -10,22 +10,23 @@ using Thusday_lession1.Models;
 
 namespace Thusday_lession1.Controllers
 {
-    public class CategoriesController : Controller
+    public class PetsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CategoriesController(ApplicationDbContext context)
+        public PetsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Categories
+        // GET: Pets
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categories.ToListAsync());
+            var applicationDbContext = _context.Pets.Include(p => p.Category);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Categories/Details/5
+        // GET: Pets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,42 @@ namespace Thusday_lession1.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
-            if (category == null)
+            var pet = await _context.Pets
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.PetId == id);
+            if (pet == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(pet);
         }
 
-        // GET: Categories/Create
+        // GET: Pets/Create
         public IActionResult Create()
         {
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Pets/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,Name")] Category category)
+        public async Task<IActionResult> Create([Bind("PetId,Name,CategoryId")] Pet pet)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
+                _context.Add(pet);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", pet.CategoryId);
+            return View(pet);
         }
 
-        // GET: Categories/Edit/5
+        // GET: Pets/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +77,23 @@ namespace Thusday_lession1.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var pet = await _context.Pets.FindAsync(id);
+            if (pet == null)
             {
                 return NotFound();
             }
-            return View(category);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", pet.CategoryId);
+            return View(pet);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Pets/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,Name")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("PetId,Name,CategoryId")] Pet pet)
         {
-            if (id != category.CategoryId)
+            if (id != pet.PetId)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace Thusday_lession1.Controllers
             {
                 try
                 {
-                    _context.Update(category);
+                    _context.Update(pet);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.CategoryId))
+                    if (!PetExists(pet.PetId))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,11 @@ namespace Thusday_lession1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", pet.CategoryId);
+            return View(pet);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Pets/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +130,31 @@ namespace Thusday_lession1.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
-            if (category == null)
+            var pet = await _context.Pets
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.PetId == id);
+            if (pet == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(pet);
         }
 
-        // POST: Categories/Delete/5
+        // POST: Pets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            _context.Categories.Remove(category);
+            var pet = await _context.Pets.FindAsync(id);
+            _context.Pets.Remove(pet);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool PetExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryId == id);
+            return _context.Pets.Any(e => e.PetId == id);
         }
     }
 }

@@ -32,3 +32,21 @@ Create based  on the category model
 1. List the tables /Models
 2. List the properties / columns
 3. Relationships between tables/ models
+
+- Create diagram of relationships among models
+- Setup Models
+- Connect Relationship 
+
+## Connecting the web project to the database
+
+1. appsettings.json > 
+
+- if using Windows Authentication for SQL server > "Server=your-computer-name;Database=your-db-name;IntegratedSecurity=True;"
+- SQL Server Authentication - local
+"Server=your-computer-name;Database=your-db-name;UserId=yourusername;Password=your-password"
+- Azure
+"Server=thusdaylession1.database.windows.net;Database=Thusday_lession1;User Id=thudba;Password=YGRenESR4vT9vD;"
+
+2. Tools > NuGet package manager > Package Manager console > add-migration CreateFirstTables > update-database
+
+**Everytime change in Models > run add-migration (same likes commit)** 
