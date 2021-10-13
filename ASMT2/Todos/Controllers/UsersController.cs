@@ -10,23 +10,22 @@ using Todos.Models;
 
 namespace Todos.Controllers
 {
-    public class TodoesController : Controller
+    public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public TodoesController(ApplicationDbContext context)
+        public UsersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Todoes
+        // GET: Users
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Todos.Include(t => t.TodoList);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Users.ToListAsync());
         }
 
-        // GET: Todoes/Details/5
+        // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +33,39 @@ namespace Todos.Controllers
                 return NotFound();
             }
 
-            var todo = await _context.Todos
-                .Include(t => t.TodoList)
+            var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (todo == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(todo);
+            return View(user);
         }
 
-        // GET: Todoes/Create
+        // GET: Users/Create
         public IActionResult Create()
         {
-            ViewData["TodoListModelId"] = new SelectList(_context.TodoListModels, "Id", "Name");
             return View();
         }
 
-        // POST: Todoes/Create
+        // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TodoName,TodoListModelId,Deadline,DaysTime")] Todo todo)
+        public async Task<IActionResult> Create([Bind("Id,UserName,Email,Phone")] User user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(todo);
+                _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TodoListModelId"] = new SelectList(_context.TodoListModels, "Id", "Name", todo.TodoListModelId);
-            return View(todo);
+            return View(user);
         }
 
-        // GET: Todoes/Edit/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +73,22 @@ namespace Todos.Controllers
                 return NotFound();
             }
 
-            var todo = await _context.Todos.FindAsync(id);
-            if (todo == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            ViewData["TodoListModelId"] = new SelectList(_context.TodoListModels, "Id", "Name", todo.TodoListModelId);
-            return View(todo);
+            return View(user);
         }
 
-        // POST: Todoes/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TodoName,TodoListModelId,Deadline,DaysTime")] Todo todo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Email,Phone")] User user)
         {
-            if (id != todo.Id)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -102,12 +97,12 @@ namespace Todos.Controllers
             {
                 try
                 {
-                    _context.Update(todo);
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TodoExists(todo.Id))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +113,10 @@ namespace Todos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TodoListModelId"] = new SelectList(_context.TodoListModels, "Id", "Name", todo.TodoListModelId);
-            return View(todo);
+            return View(user);
         }
 
-        // GET: Todoes/Delete/5
+        // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +124,30 @@ namespace Todos.Controllers
                 return NotFound();
             }
 
-            var todo = await _context.Todos
-                .Include(t => t.TodoList)
+            var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (todo == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(todo);
+            return View(user);
         }
 
-        // POST: Todoes/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var todo = await _context.Todos.FindAsync(id);
-            _context.Todos.Remove(todo);
+            var user = await _context.Users.FindAsync(id);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TodoExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.Todos.Any(e => e.Id == id);
+            return _context.Users.Any(e => e.Id == id);
         }
     }
 }

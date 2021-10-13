@@ -22,7 +22,8 @@ namespace Todos.Controllers
         // GET: TodoListModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TodoListModels.ToListAsync());
+            var applicationDbContext = _context.TodoListModels.Include(t => t.Users);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: TodoListModels/Details/5
@@ -34,6 +35,7 @@ namespace Todos.Controllers
             }
 
             var todoListModel = await _context.TodoListModels
+                .Include(t => t.Users)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (todoListModel == null)
             {
@@ -46,6 +48,7 @@ namespace Todos.Controllers
         // GET: TodoListModels/Create
         public IActionResult Create()
         {
+            ViewData["UsersId"] = new SelectList(_context.Users, "Id", "Email");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace Todos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] TodoListModel todoListModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,UsersId")] TodoListModel todoListModel)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace Todos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UsersId"] = new SelectList(_context.Users, "Id", "Email", todoListModel.UsersId);
             return View(todoListModel);
         }
 
@@ -78,6 +82,7 @@ namespace Todos.Controllers
             {
                 return NotFound();
             }
+            ViewData["UsersId"] = new SelectList(_context.Users, "Id", "Email", todoListModel.UsersId);
             return View(todoListModel);
         }
 
@@ -86,7 +91,7 @@ namespace Todos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] TodoListModel todoListModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UsersId")] TodoListModel todoListModel)
         {
             if (id != todoListModel.Id)
             {
@@ -113,6 +118,7 @@ namespace Todos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UsersId"] = new SelectList(_context.Users, "Id", "Email", todoListModel.UsersId);
             return View(todoListModel);
         }
 
@@ -125,6 +131,7 @@ namespace Todos.Controllers
             }
 
             var todoListModel = await _context.TodoListModels
+                .Include(t => t.Users)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (todoListModel == null)
             {

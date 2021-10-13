@@ -14,5 +14,10 @@ namespace Todos.Models
     public string Name { get; set; }
 
     public List<Todo> Todos { get; set; }
+
+    //add parent ref to Todo List
+    public int UsersId { get; set; }
+    public User Users { get; set; }
+
   }
 }

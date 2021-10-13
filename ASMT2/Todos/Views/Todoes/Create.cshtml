@@ -13,6 +13,15 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="TodoName" class="control-label"></label>
+                <input asp-for="TodoName" class="form-control" />
+                <span asp-validation-for="TodoName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TodoListModelId" class="control-label"></label>
+                <select asp-for="TodoListModelId" class ="form-control" asp-items="ViewBag.TodoListModelId"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="Deadline" class="control-label"></label>
                 <input asp-for="Deadline" class="form-control" />
                 <span asp-validation-for="Deadline" class="text-danger"></span>
@@ -21,15 +30,6 @@
                 <label asp-for="DaysTime" class="control-label"></label>
                 <input asp-for="DaysTime" class="form-control" />
                 <span asp-validation-for="DaysTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TodoName" class="control-label"></label>
-                <input asp-for="TodoName" class="form-control" />
-                <span asp-validation-for="TodoName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TodoListModelId" class="control-label"></label>
-                <select asp-for="TodoListModelId" class ="form-control" asp-items="ViewBag.TodoListModelId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
