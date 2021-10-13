@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Todos</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
 </head>
 <body>
     <header>
@@ -22,7 +23,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TodoListModels" asp-action="Index">TodoList</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="TodoListModels" asp-action="Index"> <i class="fas fa-th-list"></i> All Of List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Todoes" asp-action="Index"><i class="fas fa-check-circle"></i> All Todoes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index"> <i class="far fa-user"></i> All Users</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -38,7 +45,13 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - Todos - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="d-flex flex-wrap justify-content-between">
+
+                <p>
+                    &copy; 2021 - ToDoList - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a href="https://github.com/felix-le/geo-asp-net" target="_blank">View My Github </a>
+                </p>
+                <small>Felix Le - 200443551 - 21F Server-Side Scripting-ASP.NET - 04</small>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
