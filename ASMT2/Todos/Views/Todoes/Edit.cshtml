@@ -1,0 +1,49 @@
+﻿@model Todos.Models.Todo
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Todo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Deadline" class="control-label"></label>
+                <input asp-for="Deadline" class="form-control" />
+                <span asp-validation-for="Deadline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DaysTime" class="control-label"></label>
+                <input asp-for="DaysTime" class="form-control" />
+                <span asp-validation-for="DaysTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TodoName" class="control-label"></label>
+                <input asp-for="TodoName" class="form-control" />
+                <span asp-validation-for="TodoName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TodoListModelId" class="control-label"></label>
+                <select asp-for="TodoListModelId" class="form-control" asp-items="ViewBag.TodoListModelId"></select>
+                <span asp-validation-for="TodoListModelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
