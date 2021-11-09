@@ -1,6 +1,6 @@
 # This is a website for ASP.NET Class from Felix Le
 The repository has 2 parts. 
-1. ASMT: my code
+1. ASMT2: my code
 2. Learning: where I practiced the code in the class
 ---
 ASMT2: 
