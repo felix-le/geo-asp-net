@@ -32,9 +32,27 @@ namespace Todos
               Configuration.GetConnectionString("DefaultConnection")));
       services.AddDatabaseDeveloperPageExceptionFilter();
 
+      // enable Role Management for Authorization - User Mgmt for Authentication enabled by default
       services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+          .AddRoles<IdentityRole>()
           .AddEntityFrameworkStores<ApplicationDbContext>();
       services.AddControllersWithViews();
+
+      // enable Google Login using NuGet package we installed and API keys we added to appsettings.json
+      services.AddAuthentication()
+          .AddGoogle(options =>
+          {
+            options.ClientId = Configuration.GetValue<string>("Authentication:Google:ClientId");
+            options.ClientSecret = Configuration.GetValue<string>("Authentication:Google:ClientSecret");
+          });
+
+      // enable Facebook Login using NuGet package we installed and API keys we added to appsettings.json
+      services.AddAuthentication()
+           .AddFacebook(options =>
+           {
+             options.AppId = Configuration.GetValue<string>("Authentication:Facebook:AppId");
+             options.ClientSecret = Configuration.GetValue<string>("Authentication:Facebook:ClientSecret");
+           });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
