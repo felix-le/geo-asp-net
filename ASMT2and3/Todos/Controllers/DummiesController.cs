@@ -10,7 +10,8 @@ namespace Todos.Controllers
   {
     public IActionResult Index()
     {
-      return View();
+      ViewData["Message"] = "Hello World";
+      return View("Index");
     }
   }
 }

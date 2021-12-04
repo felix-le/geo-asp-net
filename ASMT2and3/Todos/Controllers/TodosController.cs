@@ -24,7 +24,7 @@ namespace Todos.Controllers
     public async Task<IActionResult> Index()
     {
       var applicationDbContext = _context.Todos.Include(t => t.TodoList);
-      return View(await applicationDbContext.ToListAsync());
+      return View("Index", await applicationDbContext.ToListAsync());
     }
 
     // GET: Todos/Details/5
@@ -147,6 +147,11 @@ namespace Todos.Controllers
 
       return View(todo);
     }
+
+
+
+
+
     [Authorize]
 
     // POST: Todos/Delete/5
