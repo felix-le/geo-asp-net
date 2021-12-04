@@ -24,8 +24,6 @@ namespace Todos.Models
     public int DaysTime { get; set; }
 
 
-
-
     //add parent ref to Todo List
     public TodoListModel TodoList { get; set; }
 
