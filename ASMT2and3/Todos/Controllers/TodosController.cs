@@ -11,11 +11,11 @@ using Todos.Models;
 
 namespace Todos.Controllers
 {
-  public class TodoesController : Controller
+  public class TodosController : Controller
   {
     private readonly ApplicationDbContext _context;
 
-    public TodoesController(ApplicationDbContext context)
+    public TodosController(ApplicationDbContext context)
     {
       _context = context;
     }
