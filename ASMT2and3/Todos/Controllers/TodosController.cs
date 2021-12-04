@@ -20,14 +20,14 @@ namespace Todos.Controllers
       _context = context;
     }
 
-    // GET: Todoes
+    // GET: Todos
     public async Task<IActionResult> Index()
     {
       var applicationDbContext = _context.Todos.Include(t => t.TodoList);
       return View(await applicationDbContext.ToListAsync());
     }
 
-    // GET: Todoes/Details/5
+    // GET: Todos/Details/5
     public async Task<IActionResult> Details(int? id)
     {
       if (id == null)
@@ -46,7 +46,7 @@ namespace Todos.Controllers
       return View(todo);
     }
 
-    // GET: Todoes/Create
+    // GET: Todos/Create
     [Authorize]
 
     public IActionResult Create()
@@ -56,7 +56,7 @@ namespace Todos.Controllers
     }
     [Authorize]
 
-    // POST: Todoes/Create
+    // POST: Todos/Create
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
@@ -74,7 +74,7 @@ namespace Todos.Controllers
     }
     [Authorize]
 
-    // GET: Todoes/Edit/5
+    // GET: Todos/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
       if (id == null)
@@ -92,7 +92,7 @@ namespace Todos.Controllers
     }
     [Authorize]
 
-    // POST: Todoes/Edit/5
+    // POST: Todos/Edit/5
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
@@ -129,7 +129,7 @@ namespace Todos.Controllers
     }
     [Authorize]
 
-    // GET: Todoes/Delete/5
+    // GET: Todos/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
       if (id == null)
@@ -149,7 +149,7 @@ namespace Todos.Controllers
     }
     [Authorize]
 
-    // POST: Todoes/Delete/5
+    // POST: Todos/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
