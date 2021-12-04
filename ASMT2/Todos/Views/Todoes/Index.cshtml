@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Todos.Models.Todo>
 
 @{
-    ViewData["Title"] = "All Of Todoes";
+    ViewData["Title"] = "All Of Todos";
 }
 
 <h1>All Of Todoes</h1>
@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create A New Todo</a>
 </p>
-<table class="table">
+<table class="table sortable">
     <thead>
         <tr>
             <th>
