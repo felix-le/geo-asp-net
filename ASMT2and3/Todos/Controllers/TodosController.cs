@@ -30,9 +30,10 @@ namespace Todos.Controllers
     // GET: Todos/Details/5
     public async Task<IActionResult> Details(int? id)
     {
+      //Todos/Details/ bla bla
       if (id == null)
       {
-        return NotFound();
+        return View("404");
       }
 
       var todo = await _context.Todos
@@ -40,10 +41,10 @@ namespace Todos.Controllers
           .FirstOrDefaultAsync(m => m.Id == id);
       if (todo == null)
       {
-        return NotFound();
+        return View("404");
       }
 
-      return View(todo);
+      return View("Details", todo);
     }
 
     // GET: Todos/Create

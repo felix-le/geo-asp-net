@@ -102,5 +102,46 @@ namespace TodosTests
 
       Assert.AreEqual("Index", result.ViewName);
     }
+
+    [TestMethod]
+    public void IndexReturnsTodos()
+    {
+      //act
+      var result = (ViewResult)controller.Index().Result;
+
+      //assert - check the data returned the same as our todo list
+
+      //Collection Assert > checking a list
+
+      // check order if has any errors
+      CollectionAssert.AreEqual(todos, (List<Todo>)result.Model);
+
+    }
+
+    // Details Tests
+    [TestMethod]
+    public void DetailsNullIdLoads404()
+    {
+      // act
+
+      var result = (ViewResult)controller.Details(null).Result;
+
+      // assert
+      Assert.AreEqual("404", result.ViewName);
+
+    }
+
+    [TestMethod]
+    public void DetailValidIdLoadsDetailsView()
+    {
+      // act
+
+      var result = (ViewResult)controller.Details(1).Result;
+
+      // assert
+      Assert.AreEqual("Details", result.ViewName);
+
+    }
+
   }
 }
