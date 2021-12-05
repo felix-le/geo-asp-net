@@ -140,6 +140,7 @@ namespace PawsitivePetsTests
       // assert
       Assert.AreEqual("Details", result.ViewName);
     }
+      //Edit (POST)
     // if id != pet.PetId
     [TestMethod]
     public void DetailsValidIdReturnsPet()
@@ -152,8 +153,6 @@ namespace PawsitivePetsTests
     }
 
     //Edit (POST)
-
-
 
     [TestMethod]
     public void DbUpdateConcurrencyException_EditToDoIdIsNotEqual()
