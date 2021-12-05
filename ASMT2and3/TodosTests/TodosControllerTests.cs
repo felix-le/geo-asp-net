@@ -131,17 +131,58 @@ namespace TodosTests
 
     }
 
+
+    [TestMethod]
+    public void DetailsInvalidIdLoads404()
+    {
+      // act
+      var result = (ViewResult)controller.Details(100).Result;
+
+      // assert
+      Assert.AreEqual("404", result.ViewName);
+    }
+
     [TestMethod]
     public void DetailValidIdLoadsDetailsView()
     {
       // act
 
-      var result = (ViewResult)controller.Details(1).Result;
+      var result = (ViewResult)controller.Details(10001).Result;
 
       // assert
       Assert.AreEqual("Details", result.ViewName);
 
     }
+
+
+    // Test Edit (POST)
+
+    /*
+     * 2.	Write Unit Tests for ONE of the following methods in ONE of your project’s Controllers, using the in-memory database to create mock data (create 3 mock records).  
+     * You should write a separate unit test for each outcome that can occur in the method you choose.  This means you will need 3-5 tests in total for the method chosen. 
+     * You can choose to write tests for any ONE of the following methods:
+      d.	Edit (POST)
+
+      A few hints:
+      o	In the method you choose, in the return View() statement, you should explicitly provide the name of the view as a string inside the brackets.
+      o	If you choose Create POST or Edit POST, you will need to simulate the condition that the model posted is invalid.  To create this condition, you can use this line in your unit test:
+
+      controller.ModelState.AddModelError("put a descriptive key name here", "add an appropriate key value here");  
+
+     */
+
+    // if id != pet.PetId
+
+
+
+    // if ModelState.IsValid is invalid
+
+    // arrange (replace the key name/value below with something descriptive)
+    // controller.ModelState.AddModelError("put a descriptive key name here", "add an appropriate key value here");
+
+    // if modelstate is valid && !PetExists(pet.PetId) ==> view 404
+
+    // View data CategoryId 
 
   }
 }

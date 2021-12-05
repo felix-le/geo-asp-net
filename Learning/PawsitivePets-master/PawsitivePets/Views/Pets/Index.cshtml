@@ -1,0 +1,72 @@
+﻿@model IEnumerable<PawsitivePets.Models.Pet>
+
+@{
+    ViewData["Title"] = "Pets";
+}
+
+<h1>Pets</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table sortable table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a href="#">Category</a>
+            </th>
+            <th>
+                <a href="#">Name</a>
+            </th>
+            <th>
+                <a href="#">Colour</a>
+            </th>
+            <th>
+                <a href="#">Age</a>
+            </th>
+            <th>
+                <a href="#">Price</a>
+            </th>
+            <th class="sorttable_nosort">              
+            </th>
+            <th class="sorttable_nosort"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Colour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @if (item.Photo != null)
+                {
+                    <img src="~/img/pets/@item.Photo" alt="Pet Photo" class="thumb" />
+                }
+                else
+                {
+                    <img src="~/img/pets/placeholder.gif" alt="Pet Photo" class="thumb" />
+                }
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PetId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PetId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PetId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<PawsitivePets.Models.Pet>
+
+@{ ViewData["Title"] = "Our Pets"; }
+
+<h1>Our @ViewBag.Category</h1>
+<section class="row card-group">
+    @foreach (var p in Model)
+        {
+            <div class="col-sm-6 col-lg-4 mb-3">
+                <div class="card mb-4 text-center h-100">
+                    <div class="card-body">
+                        <h5>@p.Name</h5>
+                        <h6>Age: @p.Age</h6>
+                        <h6>@String.Format("{0:c}", p.Price)</h6>
+                        @if (p.Photo != null)
+                        {
+                            <img src="~/img/pets/@p.Photo" alt="Pet Photo" class="thumb" />
+                        }
+                        else
+                        {
+                            <img src="~/img/pets/placeholder.gif" alt="Pet Photo" class="thumb" />
+                        }
+                        <form method="post" action="/Shop/AddToCart">
+                            <input type="hidden" name="PetId" value="@p.PetId" />
+                            <button class="btn btn-primary mt-4">I Want This Pet!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+</section>
