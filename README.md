@@ -19,9 +19,25 @@ Some features:
 - add image to home page
 - connect one to many from 3 tables.
 
+
 ---- updated Nov 16, 2019
 
 1. You do not need to confirm your email address.
 2. You can login with your account : rich@gc.ca / Test123$
 3. Only user can create/delete/update data
 4. You can register by Google, Facebook account.
+
+
+
+-- Updated Dec 05
+
+* Activity 12: 
+- Create 2 test case for **POST: Pets/Edit/5** 
+
++ DetailsValidIdReturnsPet (id != pet.PetId)
++DbUpdateConcurrencyException_EditToDoIdIsNotEqual
+
+* Assigment 4: 
+
++ EditToDoIdIsNotEqual
++ EditIsNotValid

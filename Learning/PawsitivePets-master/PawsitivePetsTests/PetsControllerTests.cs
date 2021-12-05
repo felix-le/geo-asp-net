@@ -140,7 +140,7 @@ namespace PawsitivePetsTests
       // assert
       Assert.AreEqual("Details", result.ViewName);
     }
-
+    // if id != pet.PetId
     [TestMethod]
     public void DetailsValidIdReturnsPet()
     {
@@ -153,12 +153,10 @@ namespace PawsitivePetsTests
 
     //Edit (POST)
 
-    // if id != pet.PetId
 
 
-    // id != todo.Id
     [TestMethod]
-    public void EditToDoIdIsNotEqual()
+    public void DbUpdateConcurrencyException_EditToDoIdIsNotEqual()
     {
       controller.ModelState.AddModelError("key", "error message");
 
