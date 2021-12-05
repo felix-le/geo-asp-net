@@ -19,7 +19,7 @@ namespace PawsitivePetsTests
     private ApplicationDbContext _context;
     PetsController controller;
     List<Pet> pets = new List<Pet>();
-
+    Pet _pet = new Pet();
     // use this special start up method that runs automatically before every test to do global arrange
     [TestInitialize]
     public void TestInitialize()
@@ -37,7 +37,16 @@ namespace PawsitivePetsTests
         Name = "Mock Category"
       };
       _context.Categories.Add(category);
-
+      _pet = new Pet
+      {
+        PetId = 28,
+        Name = "Mock update pet",
+        Age = 10,
+        Price = 100,
+        CategoryId = 1000,
+        Category = category,
+        Photo = null,
+      };
       pets.Add(new Pet
       {
         PetId = 28,
@@ -45,7 +54,8 @@ namespace PawsitivePetsTests
         Age = 10,
         Price = 100,
         CategoryId = 1000,
-        Category = category
+        Category = category,
+        Photo = null,
       });
 
       pets.Add(new Pet
@@ -55,7 +65,8 @@ namespace PawsitivePetsTests
         Age = 2,
         Price = 1000,
         CategoryId = 1000,
-        Category = category
+        Category = category,
+        Photo = null,
       });
 
       pets.Add(new Pet
@@ -65,7 +76,8 @@ namespace PawsitivePetsTests
         Age = 1,
         Price = 80,
         CategoryId = 1000,
-        Category = category
+        Category = category,
+        Photo = null,
       });
 
       foreach (var pet in pets)
@@ -143,13 +155,20 @@ namespace PawsitivePetsTests
 
     // if id != pet.PetId
 
-    // if ModelState.IsValid is invalid
 
-    // arrange (replace the key name/value below with something descriptive)
-    // controller.ModelState.AddModelError("put a descriptive key name here", "add an appropriate key value here");
+    // id != todo.Id
+    [TestMethod]
+    public void EditToDoIdIsNotEqual()
+    {
+      controller.ModelState.AddModelError("key", "error message");
 
-    // if modelstate is valid && !PetExists(pet.PetId) ==> view 404
+      // act
 
-    // View data CategoryId 
+      var result = (ViewResult)controller.Edit(28, pets[0], null).Result;
+
+      // assert
+      Assert.AreEqual(pets[0], (Pet)result.Model);
+    }
+
   }
 }
