@@ -30,7 +30,6 @@ namespace Todos.Controllers
     // GET: Todos/Details/5
     public async Task<IActionResult> Details(int? id)
     {
-      //Todos/Details/ bla bla
       if (id == null)
       {
         return View("404");
@@ -102,7 +101,7 @@ namespace Todos.Controllers
     {
       if (id != todo.Id)
       {
-        return NotFound();
+        return View("Error");
       }
 
       if (ModelState.IsValid)
@@ -116,7 +115,7 @@ namespace Todos.Controllers
         {
           if (!TodoExists(todo.Id))
           {
-            return NotFound();
+            return View("404");
           }
           else
           {
@@ -164,6 +163,11 @@ namespace Todos.Controllers
       _context.Todos.Remove(todo);
       await _context.SaveChangesAsync();
       return RedirectToAction(nameof(Index));
+    }
+
+    public object RedirectMethod()
+    {
+      throw new NotImplementedException();
     }
 
     private bool TodoExists(int id)

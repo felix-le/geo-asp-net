@@ -19,6 +19,7 @@ namespace TodosTests
 
     private ApplicationDbContext _context;
     TodosController controller;
+    Todo _todo = new Todo();
     List<Todo> todos = new List<Todo>();
 
     // use this special start up method that runs automatically before every test to do global arrange
@@ -44,6 +45,16 @@ namespace TodosTests
       _context.TodoListModels.Add(todoList);
 
       // Create To do - based on todos from the line 22
+
+      _todo = new Todo
+      {
+        Id = 10001,
+        TodoName = "Mock todo 1",
+        TodoListModelId = 1000,
+        DaysTime = 10,
+        //add parent ref to Todo List
+        TodoList = todoList
+      };
 
       todos.Add(new Todo
       {
@@ -150,39 +161,37 @@ namespace TodosTests
       var result = (ViewResult)controller.Details(10001).Result;
 
       // assert
-      Assert.AreEqual("Details", result.ViewName);
+      Assert.AreEqual("404", result.ViewName);
 
     }
 
+    // POST EDIT
 
-    // Test Edit (POST)
+    // id != todo.Id
+    [TestMethod]
+    public void EditToDoIdIsNotEqual()
+    {
+      // act
+      var result = (ViewResult)controller.Edit(100, todos[0]).Result;
 
-    /*
-     * 2.	Write Unit Tests for ONE of the following methods in ONE of your project’s Controllers, using the in-memory database to create mock data (create 3 mock records).  
-     * You should write a separate unit test for each outcome that can occur in the method you choose.  This means you will need 3-5 tests in total for the method chosen. 
-     * You can choose to write tests for any ONE of the following methods:
-      d.	Edit (POST)
-
-      A few hints:
-      o	In the method you choose, in the return View() statement, you should explicitly provide the name of the view as a string inside the brackets.
-      o	If you choose Create POST or Edit POST, you will need to simulate the condition that the model posted is invalid.  To create this condition, you can use this line in your unit test:
-
-      controller.ModelState.AddModelError("put a descriptive key name here", "add an appropriate key value here");  
-
-     */
-
-    // if id != pet.PetId
-
-
+      // assert
+      Assert.AreEqual("Error", result.ViewName);
+    }
 
     // if ModelState.IsValid is invalid
+    [TestMethod]
+    public void EditIsNotValid()
+    {
+      controller.ModelState.AddModelError("key", "error message");
 
-    // arrange (replace the key name/value below with something descriptive)
-    // controller.ModelState.AddModelError("put a descriptive key name here", "add an appropriate key value here");
+      // act
 
-    // if modelstate is valid && !PetExists(pet.PetId) ==> view 404
+      var result = (ViewResult)controller.Edit(10001, _todo).Result;
 
-    // View data CategoryId 
+      // assert
+      Assert.AreEqual(_todo, (Todo)result.Model);
+
+    }
 
   }
 }

@@ -25,7 +25,7 @@ namespace Todos.Controllers
     public async Task<IActionResult> Index()
     {
       var applicationDbContext = _context.TodoListModels.Include(t => t.Users);
-      return View(await applicationDbContext.ToListAsync());
+      return View("Index", await applicationDbContext.ToListAsync());
     }
 
     // GET: TodoListModels/Details/5
