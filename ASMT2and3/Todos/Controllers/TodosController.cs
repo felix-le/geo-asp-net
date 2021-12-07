@@ -125,7 +125,7 @@ namespace Todos.Controllers
         return RedirectToAction(nameof(Index));
       }
       ViewData["TodoListModelId"] = new SelectList(_context.TodoListModels, "Id", "Name", todo.TodoListModelId);
-      return View(todo);
+      return View("Edit", todo);
     }
     [Authorize]
 

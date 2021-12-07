@@ -153,17 +153,6 @@ namespace TodosTests
       Assert.AreEqual("404", result.ViewName);
     }
 
-    [TestMethod]
-    public void DetailValidIdLoadsDetailsView()
-    {
-      // act
-
-      var result = (ViewResult)controller.Details(10001).Result;
-
-      // assert
-      Assert.AreEqual("404", result.ViewName);
-
-    }
 
     // POST EDIT
 
@@ -190,8 +179,42 @@ namespace TodosTests
 
       // assert
       Assert.AreEqual(_todo, (Todo)result.Model);
-
     }
 
+    // if edit suggest fully => compare the result and data
+    [TestMethod]
+    public void EditFullyCompare()
+    {
+      _todo.TodoName = "updated";
+
+      controller.ModelState.AddModelError("key", "error message");
+
+      // act
+
+      var result = (ViewResult)controller.Edit(10001, _todo).Result;
+
+      // assert
+      Assert.AreEqual(_todo, (Todo)result.Model);
+    }
+
+    /*
+     * You need some more tests here and for your first test you called the Details method not the Edit method.  X
+     * You also need to test when the model is invalid that the view returned is called Edit, and also add "Edit" as a string parameter to the Edit method.  
+     * You also need a test when the model is valid to ensure that the updated pet object is saved to the db.
+     */
+    [TestMethod]
+    public void EditShowDataCorrectValues()
+    {
+      _todo.TodoName = "";
+
+      controller.ModelState.AddModelError("key", "error message");
+
+      // act
+
+      var result = (ViewResult)controller.Edit(10001, _todo).Result;
+
+      // assert
+      Assert.AreEqual("Edit", result.ViewName);
+    }
   }
 }
