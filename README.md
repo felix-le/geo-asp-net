@@ -41,3 +41,6 @@ Some features:
 
 + EditToDoIdIsNotEqual
 + EditIsNotValid
++ EditFullyCompare
++ EditShowDataCorrectValues
+
