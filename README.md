@@ -37,7 +37,7 @@ Some features:
 + DetailsValidIdReturnsPet (id != pet.PetId)
 +DbUpdateConcurrencyException_EditToDoIdIsNotEqual
 
-* Assigment 4: 
+* Assigment 4: in Asmt2and3
 
 + EditToDoIdIsNotEqual
 + EditIsNotValid
